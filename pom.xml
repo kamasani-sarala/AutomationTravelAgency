@@ -17,11 +17,6 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-	<dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-    <version>2.2.6.RELEASE</version> <!-- Specify the appropriate version here -->
-</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
