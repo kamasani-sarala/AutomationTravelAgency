@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.automation.entity.Route;
+import com.automation.repository.RouteRepository;
 import com.automation.service.RouteService;
 import com.automation.service.RouteServiceImpl;
 
@@ -24,6 +27,9 @@ import ch.qos.logback.classic.Logger;
 public class RouteController {
 	@Autowired
      RouteService routeService;
+	
+	@Autowired
+	RouteRepository routeRepository;
 	
 	private final org.slf4j.Logger mylogs = LoggerFactory.getLogger(this.getClass());
 	
@@ -76,7 +82,7 @@ public class RouteController {
 	        throw new Exception("Route not found");
 	    }
 	}
-	
+	//http://localhost:8080/Route/delete/1
 	@DeleteMapping("/delete/{rId}") 
 	public String deletebyrId(@PathVariable int rId)  {
 	    try {
@@ -97,6 +103,30 @@ public class RouteController {
 	List<Route> allRoute = routeService.sortingBasedOnDistance();
 
 	return allRoute;
+	}
+	
+//	@GetMapping("/rId/{rId}")
+//	public ResponseEntity<List<Route>> getById(@PathVariable int rId) {
+//	    List<Route> listroute = null;
+//	    try {
+//	        listroute = RouteRepository.findByvId(rId);
+//	        if (listroute == null) {
+//	            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // or appropriate HTTP status code
+//	        }
+//	    } catch (Exception e) {
+//	        e.printStackTrace(); // Consider using a logger instead
+//	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // or appropriate HTTP status code
+//	    }
+//
+//	    return new ResponseEntity<>(listroute, HttpStatus.OK);
+//	}
+	//http://localhost:8080/Route/rId/1
+	@GetMapping("/rId/{rId}")
+	public ResponseEntity <List<Route>> getById(@PathVariable int rId){
+		List<Route> listroute= routeRepository.findByvId(rId);
+	//	Route r = routeRepository.findById(rId).get();		
+		return new ResponseEntity<>(listroute,HttpStatus.OK);
+	}
+	
 
-}
 }

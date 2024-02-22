@@ -24,6 +24,9 @@ public interface RouteService {
    public List<Route> sortingBasedOnDistance();
 
    public void deleteRouteByrId(int rId);
+	public List<Route> findByvId(Integer rId);
+
+  
 
 
 

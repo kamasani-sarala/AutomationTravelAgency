@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.automation.entity.Route;
-import com.automation.entity.Vehicle;
+
 import com.automation.repository.RouteRepository;
 import com.automation.sorting.SortingBasedOnDistance;
 @Service
@@ -72,4 +72,11 @@ public class RouteServiceImpl implements RouteService {
 		// TODO Auto-generated method stub
 		routeRepo.deleteById(rId);
 	}
+	@Override
+	public List<Route> findByvId(Integer rId) {
+		// TODO Auto-generated method stub
+		return routeRepo.findByvId(rId);
+	}
+
+	
 }
